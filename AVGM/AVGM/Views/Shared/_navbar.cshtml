@@ -6,13 +6,67 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            @Html.ActionLink("AVGM", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("AVGM", "Index", "Home", null, new { @class = "navbar-brand" })
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                <li>@Html.ActionLink("About", "About", "Home")</li>
-                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        About Montessori
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("The Montessori Method", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Montessori vs Traditional Education", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Questions About Montessori & Kindergarten", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Montessori Supporters", "Index", "Home")</li>
+                    </ul>
+                </li>
+
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        About Us
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Location and Directions", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Days and Hours", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Our Staff", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Our Special Programs", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Affiliations", "Index", "Home")</li>
+                    </ul>
+                </li>
+
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        For Parents
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Parent Quotes", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Parent Advice", "Index", "Home")</li>
+                        <li>@Html.ActionLink("School Calendar", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Request an Tour", "Index", "Home")</li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        For Students
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Yellow Room", "Index", "Home", null, new { @class = "yellow-room" })</li>
+                        <li>@Html.ActionLink("Orange Room", "Index", "Home", null, new { @class = "orange-room" })</li>
+                        <li>@Html.ActionLink("Blue Room", "Index", "Home", null, new { @class = "blue-room" })</li>
+                        <li>@Html.ActionLink("Green Room", "Index", "Home", null, new { @class = "green-room" })</li>
+                    </ul>
+                </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
