@@ -22,3 +22,26 @@ select,
 textarea {
     max-width: 280px;
 }
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 2em;
+    padding-left: 1em;
+    color: dimgray;
+}
+
+    footer a:link {
+        color: inherit;
+        text-decoration: inherit;
+    }
+
+    footer a:hover {
+        cursor: url(../Images/raspberryPiSliceCursor.png) 26 20, auto;
+    }
+
+    footer a:visited {
+        color: inherit;
+        text-decoration: inherit;
+    }
