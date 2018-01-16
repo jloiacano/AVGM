@@ -7,7 +7,7 @@ using AVGM.Models;
 
 namespace AVGM.DAL
 {
-    public class SchoolInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<SchoolContext>
+    public class SchoolInitializer : System.Data.Entity.CreateDatabaseIfNotExists<SchoolContext>
     {
         protected override void Seed(SchoolContext context)
         {

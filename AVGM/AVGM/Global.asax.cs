@@ -16,6 +16,7 @@ namespace AVGM
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection("SchoolContext", "Users", "UserID", "Username", true);
         }
     }
 }

@@ -10,6 +10,7 @@ namespace AVGM.Controllers
     {
         public ActionResult Index()
         {
+            //WebMatrix.WebData.WebSecurity.CreateUserAndAccount("example@example.com", "examplePass!", false);
             return View();
         }
 

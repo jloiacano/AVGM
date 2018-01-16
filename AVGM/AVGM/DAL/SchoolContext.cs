@@ -10,8 +10,24 @@ namespace AVGM.DAL
 {
     public class SchoolContext : DbContext
     {
+
+        string databaseDrop = System.Configuration.ConfigurationManager.AppSettings["DatabaseDrop"];
+
         public SchoolContext() : base("name=SchoolContext")
         {
+            if (databaseDrop == "drop")
+            {
+                Database.SetInitializer<SchoolContext>(new DropCreateDatabaseAlways<SchoolContext>());
+            }
+            else if (databaseDrop == "recreateOnChange")
+            {
+                Database.SetInitializer<SchoolContext>(new DropCreateDatabaseIfModelChanges<SchoolContext>());
+            }
+            else
+            {
+                Database.SetInitializer<SchoolContext>(new CreateDatabaseIfNotExists<SchoolContext>());
+            }
+
         }
 
         public DbSet<Student> Students { get; set; }
