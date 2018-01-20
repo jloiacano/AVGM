@@ -36,7 +36,7 @@ namespace AVGM.DAL
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<StudentGuardian> StudentGuardians { get; set; }
-        public DbSet<GuardianAddress> GuardianAddresses { get; set; }
+        //public DbSet<GuardianAddress> GuardianAddresses { get; set; }
 
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{

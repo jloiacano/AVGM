@@ -8,7 +8,9 @@ namespace AVGM.Models
 {
     public class GuardianAddress
     {
-        public int ID { get; set; }
+        [Key]
+        public int GuardianAddressID { get; set; }
+        public string TypeOfAddress { get; set; }
         public Guid GuardianID { get; set; }
         public Guid AddressID { get; set; }
         public virtual Guardian Guardian { get; set; }

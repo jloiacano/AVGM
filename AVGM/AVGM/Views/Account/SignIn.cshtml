@@ -1,4 +1,6 @@
 ﻿@{
+    /**/
+
     ViewBag.Title = "Sign In";
 }
 
@@ -18,11 +20,13 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    <br />
+
     <div class="container">
-        <div class="col-sm-4 col-sm-offset-4 assembledPiPanel addTopMargin">
+        <div class="col-sm-4 col-sm-offset-4">
             <form class="form-horizontal">
                 <div class="row">
-                    <div class="form-group form-horizontal addBottomMargin">
+                    <div class="form-group form-horizontal">
                         <label class="control-label col-sm-3" for="email">Username:</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="email" placeholder="Enter registered E-mail" name="UserName">
@@ -30,12 +34,17 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group form-horizontal addBottomMargin">
+                    <div class="form-group form-horizontal">
                         <label class="control-label col-sm-3" for="pwd">Password:</label>
                         <div class="col-sm-9">
                             <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="Password">
                         </div>
                     </div>
+                </div>
+                <div class="form-group checkbox">
+                    <label>
+                        <input type="checkbox" value="staySignedIn"> Remember me
+                    </label>
                 </div>
                 <div class="row">
                     <div class="form-group">
@@ -47,10 +56,7 @@
                 <hr />
                 <div class="row">
                     <div class="form-group">
-                        <div class="col-sm-6">
-                            @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "form-control btn btn-danger signInButtons" })
-                        </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             @Html.ActionLink("Forgot Password", "ForgotPassword", "Account", routeValues: null, htmlAttributes: new { @class = "form-control btn btn-danger signInButtons" })
                         </div>
                     </div>

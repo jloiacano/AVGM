@@ -1,0 +1,83 @@
+﻿@model AVGM.Models.Guardian
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+    int childCounter = 1;
+    int numberOfKids = Model.Students.Count();
+    var kids = Model.Students.Where(m => m.GuardianID == Model.GuardianID);
+}
+
+@if (Model.Photo != null)
+{
+    var base64 = Convert.ToBase64String(Model.Photo);
+    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+    <img width="300" src=@imgSrc alt="User Photo" />
+}
+else
+{
+    <img width="300" src="~/Images/Portrait_Placeholder.png" alt="No User Photo Provided" />
+    using (Html.BeginForm("ChangeImage", "Account", FormMethod.Post, new { enctype = "multipart/form-data", identity = User.Identity.Name }))
+
+    {
+        <input type="file" name="ImageData" id="ImageData" onchange="fileCheck(this);" />
+
+        @Html.HiddenFor(m => m.Email)
+        <input type="submit" />
+    }
+}
+
+@if (Model.DisplayName != null)
+{
+    <h4>@Model.DisplayName @Model.LName</h4>
+}
+else
+{
+    <h4>@Model.FName @Model.LName</h4>
+}
+
+<h4>
+    @Model.Relationship of
+    @foreach (var child in kids)
+    {
+        if (numberOfKids == 1)
+        {
+            var identifier = child.StudentID.GetHashCode();
+            @Html.ActionLink(child.Student.FName, "Student", new { identifier, child.Student.FName, child.Student.LName });
+            childCounter++;
+        }
+        else if (childCounter < numberOfKids)
+        {
+            var identifier = child.StudentID.GetHashCode();
+            @Html.ActionLink(child.Student.FName, "Student", new { identifier, child.Student.FName, child.Student.LName });
+            childCounter++;
+        }
+        else
+        {
+            var identifier = child.StudentID.GetHashCode();
+            <span>
+                and
+                @Html.ActionLink(child.Student.FName, "Student", new { identifier, child.Student.FName, child.Student.LName });
+            </span>
+        }
+    }
+</h4>
+
+@if (Model.SharingContactInfo)
+{
+
+    <h4>@Model.Email</h4>
+    <h4>@Model.PhoneNumber</h4>
+    <h4>@Model.Address.StreetAddress</h4>
+    <h4>@Model.Address.StreetAddress2</h4>
+    <h4>@Model.Address.City @Model.Address.State, @Model.Address.Zip</h4>
+    if (Model.LivesWithStudent)
+    {
+        <h4>Lives with Student</h4>
+    }
+    <h4>@Model.Job.Title</h4>
+    <h4>@Model.Job.Address.StreetAddress</h4>
+}
+
+

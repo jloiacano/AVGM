@@ -3,93 +3,178 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
-using AVGM.Models;   
+using AVGM.Models;
 
 namespace AVGM.DAL
 {
-    public class SchoolInitializer : System.Data.Entity.CreateDatabaseIfNotExists<SchoolContext>
+    public class SchoolInitializer : System.Data.Entity.DropCreateDatabaseAlways<SchoolContext>
     {
         protected override void Seed(SchoolContext context)
         {
-            var students = new List<Student>
+            //TODO remove after debugging/testing
+            //adds "fake" addresses to the Address table of the AVGM database
+            List<Address> testAddresses = new List<Address>();
+            testAddresses.Add(new Address
             {
-                new Student
-                {
-                    StudentID = Guid.Parse("0132C0C3-CDC4-41F7-89E7-AA6C1452B58F"),
-                    SSNumber = "111-11-1111",
-                    FName = "ExampleFirstName1",
-                    MName = "ExampleMidName1",
-                    LName = "ExampleLastName1",
-                    Gender = 'F',
-                    DOB = DateTime.Parse("2012-09-01")
-                }
-            };
+                AddressID = Guid.Parse("0132C0C3-CDC4-41F7-5555-AA6C1452B58F"),
+                StreetAddress = "1234 Main St",
+                StreetAddress2 = "",
+                City = "Libertyville",
+                State = "IL",
+                Zip = "60048",
+                Guardian = new List<Guardian>()
+            });
 
-            students.ForEach(s => context.Students.Add(s));
+            testAddresses.Add(new Address
+            {
+                AddressID = Guid.Parse("0132C0C3-CDC4-41F7-6666-AA6C1452B58F"),
+                StreetAddress = "54321 Union Ave",
+                StreetAddress2 = "",
+                City = "Libertyville",
+                State = "IL",
+                Zip = "60048",
+                Guardian = new List<Guardian>()
+            });
+
+            testAddresses.Add(new Address
+            {
+                AddressID = Guid.Parse("0132C0C3-CDC4-41F7-7777-AA6C1452B58F"),
+                StreetAddress = "4619 N Ravenswood Ave",
+                StreetAddress2 = "Suite 302C",
+                City = "Chicago",
+                State = "IL",
+                Zip = "60640",
+                Guardian = new List<Guardian>()
+            });
+
+            testAddresses.ForEach(s => context.Addresses.Add(s));
             context.SaveChanges();
 
-            var guardian = new List<Guardian>
+            //adds "fake" addresses to the Address table of the AVGM database
+            List<Job> testJob = new List<Job>();
+            testJob.Add(new Job
             {
-                new Guardian
+                JobID = Guid.Parse("0132C0C3-CDC4-41F7-8888-AA6C1452B58F"),
+                Title = "Software Developer",
+                PhoneNumber = "312-123-5555",
+                Address = testAddresses.First(m => m.AddressID == Guid.Parse("0132C0C3-CDC4-41F7-7777-AA6C1452B58F"))
+            });
+
+            //adds "fake" users to the Guardian table of the AVGM database
+            List<Guardian> testGuardians = new List<Guardian>();
+
+                testGuardians.Add(new Guardian
                 {
-                    GuardianID = Guid.Parse("E4F85065-AD5A-4122-8722-2CA89B514700"),
-                    FName = "EX:Guardian FName1",
-                    MName = "EX:Guardian MName1",
-                    LName = "EX:Guardian LName1",
+                    GuardianID = Guid.Parse("0132C0C3-CDC4-41F7-1111-AA6C1452B58F"),
+                    FName = "John",
+                    DisplayName = "J",
+                    MName = "James",
+                    LName = "Loiacano",
+                    Email = "example2@example.com",
                     Gender = 'M',
-                    DOB = DateTime.Parse("05/10/1975"),
                     Relationship = "Father",
-                    PhoneNumber = "847-555-1111",
-                    Email = "exampleGuardian1@example.com",
-                    LivesWithStudent = true
-                },
+                    PhoneNumber = "847-596-5555",
+                    LivesWithStudent = true,
+                    SharingContactInfo = true,
+                    Address = testAddresses.First(m => m.AddressID == Guid.Parse("0132C0C3-CDC4-41F7-5555-AA6C1452B58F")),
+                    Job = testJob.First(m => m.JobID == Guid.Parse("0132C0C3-CDC4-41F7-8888-AA6C1452B58F"))
+                    
+                });
 
-                new Guardian
+                testGuardians.Add(new Guardian
                 {
-                    GuardianID = Guid.Parse("8519E1C1-466B-452D-9501-04CF5C9C1C09"),
-                    FName = "EX:Guardian FName2",
-                    MName = "EX:Guardian MName2",
-                    LName = "EX:Guardian LName2",
-                    Gender = 'M',
-                    DOB = DateTime.Parse("09/22/1982"),
+                    GuardianID = Guid.Parse("0132C0C3-CDC4-41F7-2222-AA6C1452B58F"),
+                    FName = "Megan",
+                    MName = "Kristine",
+                    LName = "Loiacano",
+                    Email = "example@example.com",
+                    Gender = 'F',
                     Relationship = "Mother",
-                    PhoneNumber = "847-555-2222",
-                    Email = "exampleGuardian2@example.com",
-                    LivesWithStudent = true
-                }
-            };
+                    PhoneNumber = "773-931-5555",
+                    LivesWithStudent = true,
+                    SharingContactInfo = false,
+                    Address = testAddresses.First(m => m.AddressID == Guid.Parse("0132C0C3-CDC4-41F7-5555-AA6C1452B58F"))
+                });
 
-            guardian.ForEach(s => context.Guardians.Add(s));
+            testGuardians.ForEach(s => context.Guardians.Add(s));
             context.SaveChanges();
 
-            var addresses = new List<Address>
-            {
-            new Address{AddressID=Guid.Parse("B2BC45C2-CBDE-4036-B05A-0F9BE14A820C"), StreetAddress="EX:1234 Main St",City="EX:Libertyville", State="EX:IL", Zip="EX:60048"},
-            new Address{AddressID=Guid.Parse("BA9ECE4B-E25C-41CA-BB60-6D09C477CE29"), StreetAddress="EX:2345 Dawes St",City="EX:Libertyville", State="EX:IL", Zip="EX:60048"},
-            new Address{AddressID=Guid.Parse("D24EC251-E1F8-4F94-BA4C-A8236EB90234"), StreetAddress="EX:3456 Sunnyside Ct",City="EX:Libertyville", State="EX:IL", Zip="EX:60048"},
-            new Address{AddressID=Guid.Parse("25630C37-8C24-4943-A3C7-3DF6DC723571"), StreetAddress="EX:456 Church St",City="EX:Libertyville", State="EX:IL", Zip="EX:60048"}
-            };
+            //adds "fake" students to the Students table of the AVGM database
 
-            addresses.ForEach(s => context.Addresses.Add(s));
+            List<Student> testStudents = new List<Student>();
+                testStudents.Add(new Student
+                {
+                    StudentID = Guid.Parse("0132C0C3-CDC4-41F7-3333-AA6C1452B58F"),
+                    FName = "Zoe",
+                    MName = "Jastine",
+                    LName = "Loiacano",
+                    Gender = 'F',
+                    DOB = DateTime.Parse("12/13/2012"),
+                    SSNumber = "111-11-1111"
+                });
+
+                testStudents.Add(new Student
+                {
+                    StudentID = Guid.Parse("0132C0C3-CDC4-41F7-4444-AA6C1452B58F"),
+                    FName = "Xander",
+                    MName = "Mikah",
+                    LName = "Loiacano",
+                    Gender = 'M',
+                    DOB = DateTime.Parse("01/08/2015"),
+                    SSNumber = "222-22-2222"
+                });
+
+            testStudents.ForEach(s => context.Students.Add(s));
             context.SaveChanges();
 
-            var studentGuardians = new List<StudentGuardian>
-            {
-                new StudentGuardian{StudentID=Guid.Parse("0132C0C3-CDC4-41F7-89E7-AA6C1452B58F"),GuardianID=Guid.Parse("E4F85065-AD5A-4122-8722-2CA89B514700")},
-                new StudentGuardian{StudentID=Guid.Parse("0132C0C3-CDC4-41F7-89E7-AA6C1452B58F"),GuardianID=Guid.Parse("8519E1C1-466B-452D-9501-04CF5C9C1C09")}
-            };
+            //adds "fake" connections to the StudentGuardian table of the AVGM database
 
-            studentGuardians.ForEach(s => context.StudentGuardians.Add(s));
+            List<StudentGuardian> testStudentGuardianConnections = new List<StudentGuardian>();
+                testStudentGuardianConnections.Add(new StudentGuardian
+                {
+                    StudentID = Guid.Parse("0132C0C3-CDC4-41F7-4444-AA6C1452B58F"),
+                    GuardianID = Guid.Parse("0132C0C3-CDC4-41F7-1111-AA6C1452B58F")
+                });
+
+                testStudentGuardianConnections.Add(new StudentGuardian
+                {
+                    StudentID = Guid.Parse("0132C0C3-CDC4-41F7-4444-AA6C1452B58F"),
+                    GuardianID = Guid.Parse("0132C0C3-CDC4-41F7-2222-AA6C1452B58F")
+                });
+
+                testStudentGuardianConnections.Add(new StudentGuardian
+                {
+                    StudentID = Guid.Parse("0132C0C3-CDC4-41F7-3333-AA6C1452B58F"),
+                    GuardianID = Guid.Parse("0132C0C3-CDC4-41F7-1111-AA6C1452B58F")
+                });
+
+                testStudentGuardianConnections.Add(new StudentGuardian
+                {
+                    StudentID = Guid.Parse("0132C0C3-CDC4-41F7-3333-AA6C1452B58F"),
+                    GuardianID = Guid.Parse("0132C0C3-CDC4-41F7-2222-AA6C1452B58F")
+                });
+
+            testStudentGuardianConnections.ForEach(s => context.StudentGuardians.Add(s));
             context.SaveChanges();
 
-            var guardianAddress = new List<GuardianAddress>
-            {
-                new GuardianAddress{GuardianID=Guid.Parse("E4F85065-AD5A-4122-8722-2CA89B514700"), AddressID=Guid.Parse("B2BC45C2-CBDE-4036-B05A-0F9BE14A820C")},
-                new GuardianAddress{GuardianID=Guid.Parse("8519E1C1-466B-452D-9501-04CF5C9C1C09"), AddressID=Guid.Parse("B2BC45C2-CBDE-4036-B05A-0F9BE14A820C")}
-            };
+            //adds "fake" connections to the GuardianAddress table of the AVGM database
 
-            guardianAddress.ForEach(s => context.GuardianAddresses.Add(s));
-            context.SaveChanges();
+            //List<GuardianAddress> testGuardianAddressConnections = new List<GuardianAddress>();
+            //    testGuardianAddressConnections.Add(new GuardianAddress
+            //    {
+            //        GuardianID = Guid.Parse("0132C0C3-CDC4-41F7-1111-AA6C1452B58F"),
+            //        AddressID = Guid.Parse("0132C0C3-CDC4-41F7-5555-AA6C1452B58F")
+            //    });
+
+            //    testGuardianAddressConnections.Add(new GuardianAddress
+            //    {
+            //        GuardianID = Guid.Parse("0132C0C3-CDC4-41F7-2222-AA6C1452B58F"),
+            //        AddressID = Guid.Parse("0132C0C3-CDC4-41F7-6666-AA6C1452B58F")
+            //    });
+
+            //testGuardianAddressConnections.ForEach(s => context.GuardianAddresses.Add(s));
+            //context.SaveChanges();
+            
         }
     }
 }

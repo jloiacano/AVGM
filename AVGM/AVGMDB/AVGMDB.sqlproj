@@ -7,14 +7,14 @@
     <Name>AVGMDB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{e086b63e-e3c8-4277-a49e-2c18d1fb1e81}</ProjectGuid>
+    <ProjectGuid>{0f86ddee-d5f9-40a6-b038-44e7d16c3337}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
     <RootNamespace>AVGMDB</RootNamespace>
     <AssemblyName>AVGMDB</AssemblyName>
-    <ModelCollation>1033,CI</ModelCollation>
+    <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -23,8 +23,6 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
-    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
-    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -40,7 +38,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug\</OutputPath>
     <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
