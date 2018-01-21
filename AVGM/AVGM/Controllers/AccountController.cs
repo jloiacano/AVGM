@@ -198,6 +198,28 @@ namespace AVGM.Controllers
             return View(child);
         }
 
+        public ActionResult EditProfile()
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("SignIn", "Account");
+            }
+            Guardian thisUser = db.Guardians.First(m => m.Email == User.Identity.Name);
+            return View(thisUser);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditProfile(string identity)
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("SignIn", "Account");
+            }
+            Guardian thisUser = db.Guardians.First(m => m.Email == User.Identity.Name);
+            return View(thisUser);
+        }
+
         private byte[] ConvertToBytes(HttpPostedFileBase image)
         {
             byte[] imageBytes = null;

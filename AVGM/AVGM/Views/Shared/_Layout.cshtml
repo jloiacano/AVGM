@@ -8,7 +8,9 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    @Html.Partial("_navBar")
+
+    @Html.Action("Navbar", "Home")
+
     <div class="container body-content">
         @RenderBody()
         <footer>
