@@ -39,13 +39,13 @@ namespace AVGM.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangeImage(string Email, Object obj)
+        public ActionResult ChangeImage(string identity)
         {
             HttpPostedFileBase file = Request.Files["ImageData"];
             ImageUploader uploader = new ImageUploader();
-            int i = uploader.UploadTheImage(file, Email);
+            int i = uploader.UploadTheImage(file, identity);
 
-            return (i == 1 ? RedirectToAction("Index", "Account") : RedirectToAction("Index","Home"));
+            return (i == 1 ? RedirectToAction("EditProfile", "Account") : RedirectToAction("Index","Home"));
         }
 
         // GET: Account/Register

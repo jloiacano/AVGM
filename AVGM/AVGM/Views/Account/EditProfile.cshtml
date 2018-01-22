@@ -24,14 +24,15 @@
                     <img src="~/Images/Portrait_Placeholder.png" alt="No User Photo Provided" style="width:100%;" />
                 </div>
             }
-            @using (Html.BeginForm("ChangeImage", "Account", FormMethod.Post, new { enctype = "multipart/form-data", identity = Model.GuardianID }))
+            @using (Html.BeginForm("ChangeImage", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 <div class="margin-adder-top-and-bottom-05">
                     <input type="file" name="ImageData" id="ImageData" onchange="fileCheck(this);" />
                 </div>
-                @Html.HiddenFor(m => m);
+                @Html.Hidden("identity", Model.GuardianID)
 
                 <div class="margin-adder-top-and-bottom-05">
+
                     <button type="submit" class="btn btn-info form-control">Update Photo to Chosen File</button>
                 </div>
             }
@@ -110,12 +111,13 @@
                             <img src="~/Images/Portrait_Placeholder.png" alt="No User Photo Provided" style="width:100%;" />
                         </div>
                     }
-                    @using (Html.BeginForm("ChangeImage", "Account", FormMethod.Post, new { enctype = "multipart/form-data", identity = User.Identity.Name }))
+                    @using (Html.BeginForm("ChangeImage", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
                         <div class="margin-adder-top-and-bottom-05">
                             <input type="file" name="ImageData" id="ImageData" onchange="fileCheck(this);" />
                         </div>
-                        @Html.HiddenFor(m => m.Email);
+                        @Html.Hidden("identity", child.Student.StudentID)
+
                         <div class="margin-adder-top-and-bottom-05">
                             <button type="submit" class="btn btn-info form-control">Update Photo to Chosen File</button>
                         </div>
