@@ -39,11 +39,11 @@ namespace AVGM.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangeImage(string Email)
+        public ActionResult ChangeImage(string Email, Object obj)
         {
             HttpPostedFileBase file = Request.Files["ImageData"];
             ImageUploader uploader = new ImageUploader();
-            int i = uploader.UploadTheGuardianImage(file, Email);
+            int i = uploader.UploadTheImage(file, Email);
 
             return (i == 1 ? RedirectToAction("Index", "Account") : RedirectToAction("Index","Home"));
         }
@@ -216,8 +216,13 @@ namespace AVGM.Controllers
             {
                 return RedirectToAction("SignIn", "Account");
             }
-            Guardian thisUser = db.Guardians.First(m => m.Email == User.Identity.Name);
-            return View(thisUser);
+
+            HttpPostedFileBase file = Request.Files["ImageData"];
+            ImageUploader uploader = new ImageUploader();
+            int i = uploader.UploadTheImage(file, identity);
+
+            return (i == 1 ? RedirectToAction("EditProfile", "Account") : RedirectToAction("Index", "Home"));
+            
         }
 
         private byte[] ConvertToBytes(HttpPostedFileBase image)

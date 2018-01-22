@@ -88,3 +88,19 @@ footer {
         color: inherit;
         text-decoration: inherit;
     }
+
+.margin-adder-top-and-bottom-05{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.profile-editor-main-div {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-bottom: solid 1px black;
+}
+
+.profile-editor-text-div {
+    padding-left: 1em;
+    border-left: solid 1px black;
+}

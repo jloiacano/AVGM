@@ -14,7 +14,7 @@ namespace AVGM
 
         public ImageUploader() { }
 
-        public int UploadTheGuardianImage(HttpPostedFileBase image, String identity)
+        public int UploadTheImage(HttpPostedFileBase image, String identity)
         {
             Guardian guardianToUpdate = db.Guardians.First(m => m.Email == identity);
             guardianToUpdate.Photo = ConvertToBytes(image);
